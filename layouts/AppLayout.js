@@ -9,17 +9,14 @@ import HeaderContainer from '../containers/HeaderContainer';
 class AppLayout extends React.Component {
   static async getInitialProps () {
     return {
-      delay: await delay(1000)
+      delay: await delay(0)
     }
   }
 
   render () {
 
-    const childrenWithProps = [];
-
-    React.Children.forEach(this.props.children, child =>
-      childrenWithProps.push(React.cloneElement(child, { ...this.props, key: 1 }))
-    );
+    const { children, ...otherProps } = this.props;
+    const childrenWithProps = React.cloneElement(children, otherProps);
 
     return (
       <div>
